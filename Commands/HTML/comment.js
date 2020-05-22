@@ -9,7 +9,7 @@ module.exports = {
             embed: {
                 color: '#14b1f5',
                 title: 'HTML Comments',
-                description: "Definition and Usage\n" +
+                description: `**Definition and Usage**\n` +
                     "\n" +
                     " The comment tag is used to insert comments in the source code. Comments are not displayed in the browsers.\n" +
                     "\n" +
