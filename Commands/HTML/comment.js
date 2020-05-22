@@ -16,7 +16,7 @@ module.exports = {
                     "You can use comments to explain your code, which can help you when you edit the source code at a later date. This is especially useful if you have a lot of code.\n" +
                     "\n" +
                     `**Example**` +
-                    "```<!--This is a comment!--> <p>This is a paragraph.</p>```",
+                    `\`\`\`HTML\n<body>\n<!--This is a comment-->\n<p>This is a paragraph.</p>\n</body>\`\`\``,
             }
         });
     }
