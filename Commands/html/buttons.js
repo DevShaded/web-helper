@@ -13,14 +13,12 @@ module.exports = {
                     "\n" +
                     " The `<button>` tag defines a clickable button.\n" +
                     "\n" +
-                    "Inside a `<button>` element you can put text (and tags like `<i>`, `<strong>`, `<br>`, `<img>`, etc.). This is not possible with a button created with the `<input>` element!\n" +
-                    "\n" +
-                    "**Tip**: Always specify the type attribute for a `<button>` element, to tell browsers what type of button it is.s\n" +
+                    "Inside a `<button>` element you can put text and you can style the button with css!\n" +
                     "\n" +
                     "**Attributes**: https://www.w3schools.com/tags/tag_button.asp\n" +
                     "\n" +
                     `**Example**` +
-                    `\`\`\`HTML\n<body>\n   <button type="button">Click Me!</button>\n</body>\`\`\``,
+                    `\`\`\`HTML\n<body>\n   <button class="custom-class"></button>\n</body>\`\`\``,
             }
         });
     }
