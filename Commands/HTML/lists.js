@@ -38,7 +38,7 @@ module.exports = {
                     "The `<dl>` tag defines the description list, the `<dt>` tag defines the term (name), \nand the `<dd>` tag describes each term\n" +
                     "\n" +
                     "**Example**" +
-                    `\`\`\`HTML\n<body>\n  <dl>\n   <dt>Coffee</dt>\n   <dd>- black hot drink</dd>\n   <dt>Milk</dt>\n   <dd>- white cold drink</dd>  </dl>\n</body>\`\`\``
+                    `\`\`\`HTML\n<body>\n  <dl>\n   <dt>Coffee</dt>\n   <dd>- black hot drink</dd>\n   <dt>Milk</dt>\n   <dd>- white cold drink</dd>\n  </dl>\n</body>\`\`\``
 
             }
         });

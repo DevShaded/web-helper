@@ -29,6 +29,7 @@ const fs = require('fs');
 try {
     const registerCommandFolders = [
         ["HTML", "Html Commands"],
+        ["Public", "Public Commands"],
         ["CSS", "Css command"]
     ];
 
