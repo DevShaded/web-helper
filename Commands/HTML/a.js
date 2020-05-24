@@ -1,14 +1,14 @@
 'use strict';
 
 module.exports = {
-    name: 'links',
+    name: 'anchor',
     description: 'How to: HTML anchor tag',
     execute: async function (client, message, args) {
 
         await message.channel.send({
             embed: {
                 color: '#14b1f5',
-                title: 'HTML links',
+                title: 'HTML anchor',
                 description: `**Definition and Usage**\n` +
                     "\n" +
                     " The `<a>` tag defines a hyperlink, which is used to link from one page to another.\n" +
