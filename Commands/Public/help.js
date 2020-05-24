@@ -23,7 +23,7 @@ module.exports = {
                 color: '#14b1f5',
                 fields: [
                     {
-                        name: `🖥️ HTML`,
+                        name: `<:HTML5:714052987051311115> HTML\n`,
                         value: `${htmlCommandsArray}\n\u200b`,
                     },
                 ],
