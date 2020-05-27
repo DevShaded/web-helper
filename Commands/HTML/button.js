@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-    name: 'buttons',
-    description: 'How to: HTML buttons tag',
+    name: 'button',
+    description: 'How to: HTML button tag',
     execute: async function (client, message, args) {
 
         await message.channel.send({
