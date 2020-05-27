@@ -8,17 +8,21 @@ module.exports = {
         await message.channel.send({
             embed: {
                 color: '#14b1f5',
-                title: 'HTML buttons',
+                title: 'HTML `<button>`',
                 description: `**Definition and Usage**\n` +
                     "\n" +
-                    " The `<button>` tag defines a clickable button.\n" +
+                    " The **HTML** `<button>` element represents a clickable button, used to submit forms or anywhere in a document for accessible, standard button functionality.\n" +
                     "\n" +
-                    "Inside a `<button>` element you can put text and you can style the button with css!\n" +
+                    "By default, HTML buttons are presented in a style resembling the platform the user agent runs on\n" +
                     "\n" +
-                    "**Attributes**: https://www.w3schools.com/tags/tag_button.asp\n" +
+                    "You can change buttons’ appearance with CSS.\n" +
                     "\n" +
                     `**Example**` +
                     `\`\`\`HTML\n<body>\n   <button class="custom-class"></button>\n</body>\`\`\``,
+                timestamp: new Date(),
+                footer: {
+                    text: 'Web Helper',
+                },
             }
         });
     }
