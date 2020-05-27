@@ -22,6 +22,10 @@ module.exports = {
                     "\n" +
                     `**Example**` +
                     `\`\`\`HTML\n<body>\n    <a href="https://www.google.com">Visit Google!</a>\n</body>\`\`\``,
+                timestamp: new Date(),
+                footer: {
+                    text: 'Web Helper',
+                },
             }
         });
     }

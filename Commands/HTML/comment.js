@@ -17,6 +17,10 @@ module.exports = {
                 "\n" +
                 `**Example**` +
                     `\`\`\`HTML\n<body>\n  <!--This is a comment-->\n  <p>This is a paragraph.</p>\n</body>\`\`\``,
+                timestamp: new Date(),
+                footer: {
+                    text: 'Web Helper',
+                },
             }
         });
     }

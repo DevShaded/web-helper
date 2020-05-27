@@ -24,6 +24,10 @@ module.exports = {
                     "\n" +
                     `**Example**` +
                     `\`\`\`HTML\n<body>\n    <img src="w3schools.jpg" alt="W3Schools.com">\n</body>\`\`\``,
+                timestamp: new Date(),
+                footer: {
+                    text: 'Web Helper',
+                },
             }
         });
     }

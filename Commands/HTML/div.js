@@ -23,6 +23,10 @@ module.exports = {
                     "\n"+
                     `**Example**` +
                     `\`\`\`HTML\n<body>\n  <div class="myDiv">\n   <h2>This is a heading in a div element</h2>\n   <p>This is some text in a div element.</p>\n  </div>\n</body>\`\`\``,
+                timestamp: new Date(),
+                footer: {
+                    text: 'Web Helper',
+                },
             }
         });
     }

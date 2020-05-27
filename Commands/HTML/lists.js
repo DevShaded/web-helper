@@ -39,7 +39,10 @@ module.exports = {
                     "\n" +
                     "**Example**" +
                     `\`\`\`HTML\n<body>\n  <dl>\n   <dt>Coffee</dt>\n   <dd>- black hot drink</dd>\n   <dt>Milk</dt>\n   <dd>- white cold drink</dd>\n  </dl>\n</body>\`\`\``
-
+                timestamp: new Date(),
+                footer: {
+                    text: 'Web Helper',
+                },
             }
         });
     }

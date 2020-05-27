@@ -21,6 +21,10 @@ module.exports = {
                     "\n" +
                     `**Example**` +
                     `\`\`\`HTML\n<!DOCTYPE>\n<html>\n   <head>\n    <title>Hello there</title>\n  </head>\n</html>\`\`\``,
+                timestamp: new Date(),
+                footer: {
+                    text: 'Web Helper',
+                },
             }
         });
     }
