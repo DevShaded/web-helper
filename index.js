@@ -57,8 +57,8 @@ client.on('createChannel', async (channel) => {
 client.on('ready', async () => {
     console.log('\x1b[32mBot has succesfully signed in and is listening to events\x1b[0m');
 
-const [bot] = await pool.execute("SELECT * FROM bot ORDER BY id DESC LIMIT 1");
-await client.user.setActivity(bot[0]['description'], { type: bot[0]['type']});
+    const [bot] = await pool.execute("SELECT * FROM bot ORDER BY id DESC LIMIT 1");
+    await client.user.setActivity(bot[0]['description'], { type: bot[0]['type']});
 });
 
 client.on('message', async (message) => {
