@@ -29,6 +29,7 @@ const fs = require('fs');
 try {
     const registerCommandFolders = [
         ["HTML", "Html Commands"],
+        ["Fun", "Fun Commands"],
         ["Public", "Public Commands"],
         ["CSS", "Css command"]
     ];
@@ -53,6 +54,12 @@ client.on('channelCreate', async (channel) => {
     let createChannel = new Channel();
     await createChannel.createChannel(channel);
 });
+
+// // Channel Delete - What to do when a guild deletes a channel / category within the guild
+// client.on('channelDelete', async (channel) => {
+//     let deleteChannel = new Channel();
+//     await deleteChannel.deleteChannel(channel);
+// });
 
 client.on('ready', async () => {
     console.log('\x1b[32mBot has succesfully signed in and is listening to events\x1b[0m');
