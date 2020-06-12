@@ -30,8 +30,7 @@ try {
     const registerCommandFolders = [
         ["HTML", "Html Commands"],
         ["Fun", "Fun Commands"],
-        ["Public", "Public Commands"],
-        ["CSS", "Css command"]
+        ["Public", "Public Commands"]
     ];
 
     for (let i = 0; i < registerCommandFolders.length; i++){
