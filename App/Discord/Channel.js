@@ -45,6 +45,45 @@ Channel.prototype.createChannel = async function (channel){
 
     ]);
 };
+/**
+ * What to do when a <text/category/etc> channel has been edited
+ * @param channel
+ * */
+Channel.prototype.updateChannel = async function (channel){
+
+    let nsfw;
+    let deleted;
+
+    if (channel.deleted) {
+        deleted = 1;
+    } else {
+        deleted = 0;
+    }
+
+    if (channel.nsfw) {
+        nsfw = 1;
+    } else {
+        nsfw = 0;
+    }
+
+    await pool.execute("UPDATE channels SET name = ?, nsfw = ?, topic = ?, deleted = ?, createdTimestamp = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?", [
+        channel.name,
+        nsfw,
+        channel.topic,
+        deleted,
+        channel.createdTimestamp,
+        channel.id
+    ]);
+
+    console.log(
+        channel.name,
+        nsfw,
+        channel.topic,
+        deleted,
+        channel.createdTimestamp,
+        channel.id
+    );
+};
 
 /**
  * What to do when a new <text/category/etc> channel has been deleted
@@ -52,14 +91,7 @@ Channel.prototype.createChannel = async function (channel){
  * */
 Channel.prototype.deleteChannel = async function (channel){
 
-};
-
-/**
- * What to do when a <text/category/etc> channel has been edited
- * @param oldChannel
- * @param newChannel
- * */
-Channel.prototype.updateChannel = async function (oldChannel, newChannel){
+    // await pool.execute("DELETE FROM channels WHERE = channels, id");
 
 };
 
