@@ -21,6 +21,7 @@ const client = new Discord.Client({
  * Loading in our custom written modules (AKA Classes, Methods and Functions).
  * */
 const { Channel } = require('./App/Discord/Channel');  // Handle all channel stuff
+const { Message } = require('./App/Discord/Message'); // Handle all Message stuff
 
 client.commands = new Discord.Collection();
 
@@ -54,11 +55,19 @@ client.on('channelCreate', async (channel) => {
     await createChannel.createChannel(channel);
 });
 
-// // Channel Delete - What to do when a guild deletes a channel / category within the guild
-// client.on('channelDelete', async (channel) => {
-//     let deleteChannel = new Channel();
-//     await deleteChannel.deleteChannel(channel);
-// });
+// // Channel Update - Whenever a channel / category has been updated
+// // Example: Name changes, topic changes, channel type
+client.on('channelUpdate', async (channel) => {
+    let updateChannel = new Channel();
+    await updateChannel.updateChannel(channel);
+});
+
+// Message - Whenever a message has been send
+// Example: In a Direct Message, Text-Channel
+client.on('message', async (message) => {
+    let createMessage = new Message();
+    await createMessage.createMessage(message);
+});
 
 client.on('ready', async () => {
     console.log('\x1b[32mBot has succesfully signed in and is listening to events\x1b[0m');
