@@ -48,6 +48,12 @@ try {
     console.error('Could not load commands.', e);
 }
 
+// Guild Create - Whenever the client (BOT) joins a new guild
+client.on('message', async (message) => {
+    let createGuild = new Message();
+    await createGuild.createGuild(message);
+});
+
 
 // // Channel Create - What to do when a guild creates a new channel / category within the guild
 client.on('channelCreate', async (channel) => {
