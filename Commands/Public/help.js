@@ -9,6 +9,9 @@ module.exports = {
     execute: async function (client, message, args) {
 
         let htmlCommands = fs.readdirSync('./Commands/HTML');
+        let funCommands = fs.readdirSync('./Commands/Fun');
+
+        let funCommandsArray = [];
         let htmlCommandsArray = [];
 
         let command;
@@ -18,6 +21,11 @@ module.exports = {
             htmlCommandsArray.push(` \`${command.name}\``);
         }
 
+        for (let i = 0; i < funCommands.length; i++) {
+            command = path.parse(funCommands[i]);
+            funCommandsArray.push(` \`${command.name}\``);
+        }
+
         await message.channel.send({
             embed: {
                 color: '#14b1f5',
@@ -25,6 +33,10 @@ module.exports = {
                     {
                         name: `<:HTML5:714052987051311115> HTML\n`,
                         value: `${htmlCommandsArray}\n\u200b`,
+                    },
+                    {
+                        name: `🏓 Fun\n`,
+                        value: `${funCommandsArray}\n\u200b`,
                     },
                 ],
             }
