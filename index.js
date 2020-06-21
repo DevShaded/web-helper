@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const { pool } = require('./App/DB');
+const moment = require('moment');
 
 // Defining Discord.js module
 const Discord = require('discord.js');
@@ -21,6 +22,7 @@ const client = new Discord.Client({
  * Loading in our custom written modules (AKA Classes, Methods and Functions).
  * */
 const { Channel } = require('./App/Discord/Channel');  // Handle all channel stuff
+const { Guild } = require('./App/Discord/Guild');     // Handle all guild stuff
 const { Message } = require('./App/Discord/Message'); // Handle all Message stuff
 
 client.commands = new Discord.Collection();
@@ -48,10 +50,74 @@ try {
     console.error('Could not load commands.', e);
 }
 
+client.on('ready', async () => {
+    console.log('\x1b[32mBot has succesfully signed in and is listening to events\x1b[0m');
+
+    const [bot] = await pool.execute("SELECT * FROM bot ORDER BY id DESC LIMIT 1");
+    await client.user.setActivity(bot[0]['description'], { type: bot[0]['type']});
+});
+
+
 // Guild Create - Whenever the client (BOT) joins a new guild
-client.on('message', async (message) => {
-    let createGuild = new Message();
-    await createGuild.createGuild(message);
+client.on('guildCreate', async (guild) => {
+    let createdDatetime = guild.createdTimestamp;
+    createdDatetime = moment(createdDatetime).format('YYYY-MM-DD HH-mm-ss');
+
+    await pool.execute("INSERT IGNORE INTO guilds (guildName, guildID, banner, deleted, description, explicitContentFilter, iconURL, large, memberCount, mfaLevel, ownerID, partnered, premiumSubscriptionCount, premiumTier, region, splashURL, vanityURLCode, verificationLevel, verified, createdTimestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
+        guild.name,
+        guild.id,
+        guild.banner,
+        guild.deleted,
+        guild.description,
+        guild.explicitContentFilter,
+        guild.iconURL(),
+        guild.large,
+        guild.memberCount,
+        guild.mfaLevel,
+        guild.ownerID,
+        guild.partnered,
+        guild.premiumSubscriptionCount,
+        guild.premiumTier,
+        guild.region,
+        guild.splashURL(),
+        guild.vanityURLCode,
+        guild.verificationLevel,
+        guild.verified,
+        createdDatetime
+    ]);
+
+    let mGuild = client.guilds.cache.get('713152163366568016');
+    let mChannel = mGuild.channels.cache.get('724242330529300552');
+
+    await mChannel.send({
+        embed: {
+            color: '#28a745',
+            description: `<:signin:> Bot has joined **${guild.name}**`,
+            timestamp: new Date(),
+            footer: {
+                text: 'Web Helper',
+                icon_url: '',
+            }
+        }
+    });
+});
+
+// Guild Delete - Whenever the client (BOT) leaves a guild
+client.on('guildDelete', async (guild) => {
+    let mGuild = await client.guilds.cache.get('713152163366568016');
+    let mChannel = await mGuild.channels.cache.get('724242330529300552');
+
+    await mChannel.send({
+        embed: {
+            color: '#dc3545',
+            description: `:signout: Bot has left **${guild.name}**`,
+            timestamp: new Date(),
+            footer: {
+                text: 'Web Helper',
+                icon_url: '',
+            }
+        }
+    });
 });
 
 
@@ -73,13 +139,6 @@ client.on('channelUpdate', async (channel) => {
 client.on('message', async (message) => {
     let createMessage = new Message();
     await createMessage.createMessage(message);
-});
-
-client.on('ready', async () => {
-    console.log('\x1b[32mBot has succesfully signed in and is listening to events\x1b[0m');
-
-    const [bot] = await pool.execute("SELECT * FROM bot ORDER BY id DESC LIMIT 1");
-    await client.user.setActivity(bot[0]['description'], { type: bot[0]['type']});
 });
 
 client.on('message', async (message) => {
