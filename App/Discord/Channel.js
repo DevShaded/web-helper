@@ -35,7 +35,6 @@ Channel.prototype.createChannel = async function (channel){
     }
 
     await pool.execute("INSERT INTO channels (name, id, nsfw, topic, deleted, createdTimestamp) VALUES (?, ?, ?, ?, ?, ?)", [
-
         channel.name,
         channel.id,
         nsfw,
@@ -74,15 +73,6 @@ Channel.prototype.updateChannel = async function (channel){
         channel.createdTimestamp,
         channel.id
     ]);
-
-    console.log(
-        channel.name,
-        nsfw,
-        channel.topic,
-        deleted,
-        channel.createdTimestamp,
-        channel.id
-    );
 };
 
 /**
