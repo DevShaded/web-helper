@@ -134,13 +134,6 @@ client.on('channelUpdate', async (channel) => {
     await updateChannel.updateChannel(channel);
 });
 
-// Message - Whenever a message has been send
-// Example: In a Direct Message, Text-Channel
-client.on('message', async (message) => {
-    let createMessage = new Message();
-    await createMessage.createMessage(message);
-});
-
 client.on('message', async (message) => {
 
     let prefix;
