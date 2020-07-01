@@ -48,7 +48,7 @@ Channel.prototype.createChannel = async function (channel){
  * What to do when a <text/category/etc> channel has been edited
  * @param channel
  * */
-Channel.prototype.updateChannel = async function (channel){
+Channel.prototype.channelUpdate = async function (channel){
 
     let nsfw;
     let deleted;
@@ -64,6 +64,7 @@ Channel.prototype.updateChannel = async function (channel){
     } else {
         nsfw = 0;
     }
+
 
     await pool.execute("UPDATE channels SET name = ?, nsfw = ?, topic = ?, deleted = ?, createdTimestamp = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?", [
         channel.name,
