@@ -64,7 +64,7 @@ module.exports = {
                 ],
                 timestamp: new Date(),
                 footer: {
-                    text: '',
+                    text: 'Web Helper',
                     icon_url: '',
                 }
             }
