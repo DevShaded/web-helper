@@ -10,9 +10,11 @@ module.exports = {
 
         let htmlCommands = fs.readdirSync('./Commands/HTML');
         let funCommands = fs.readdirSync('./Commands/Fun');
+        let publicCommands = fs.readdirSync('./Commands/Public');
 
         let funCommandsArray = [];
         let htmlCommandsArray = [];
+        let publicCommandsArray = [];
 
         let command;
 
@@ -26,6 +28,10 @@ module.exports = {
             funCommandsArray.push(` \`${command.name}\``);
         }
 
+        for (let i = 0; i < publicCommands.length; i++) {
+            command = path.parse(publicCommands[i]);
+            publicCommandsArray.push(` \`${command.name}\``);
+        }
         await message.channel.send({
             embed: {
                 color: '#14b1f5',
@@ -38,8 +44,17 @@ module.exports = {
                         name: `🏓 Fun\n`,
                         value: `${funCommandsArray}\n\u200b`,
                     },
+                    {
+                        name: `<:publicCommands:728026099828654133> Public\n`,
+                        value: `${publicCommandsArray}\n\u200b`,
+                    },
                 ],
+                timestamp: new Date(),
+                footer: {
+                    text: 'Web Helper',
+                    icon_url: '',
+                },
             }
         });
     }
-}
+};
