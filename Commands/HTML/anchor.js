@@ -11,7 +11,7 @@ module.exports = {
                 title: 'HTML a',
                 description: `**Definition and Usage**\n` +
                     "\n" +
-                    " The `<a>` tag defines a hyperlink, which is used to link from one page to another.\n" +
+                    " The `<a>` tag defines a anchor, which is used to link from one page to another.\n" +
                     "\n" +
                     "The most important attribute of the `<a>` element is the href attribute, which indicates the link's destination.\n" +
                     "\n" +
