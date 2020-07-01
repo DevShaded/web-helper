@@ -9,11 +9,18 @@ const moment = require('moment');
 
 // Defining Discord.js module
 const Discord = require('discord.js');
-const client = new Discord.Client({
+const {Client, Intents} = require('discord.js');
+
+const client = new Client({
+    disableMentions: 'everyone',
     partials: [
         'MESSAGE',
-        'CHANNEL'
-    ]
+        'CHANNEL',
+        'REACTION'
+    ],
+    ws: {
+        intents: Intents.ALL
+    }
 });
 
 
@@ -50,6 +57,7 @@ try {
     console.error('Could not load commands.', e);
 }
 
+// Verify login and a steady connection to Discord their API
 client.on('ready', async () => {
     console.log('\x1b[32mBot has succesfully signed in and is listening to events\x1b[0m');
 
@@ -130,8 +138,15 @@ client.on('channelCreate', async (channel) => {
 // // Channel Update - Whenever a channel / category has been updated
 // // Example: Name changes, topic changes, channel type
 client.on('channelUpdate', async (channel) => {
-    let updateChannel = new Channel();
-    await updateChannel.updateChannel(channel);
+    let channelUpdate = new Channel();
+    await channelUpdate.channelUpdate(channel);
+});
+
+// Message - Whenever a message has been send
+// Example: In a Direct Message, Text-Channel
+client.on('message', async (message) => {
+    let createMessage = new Message();
+    await createMessage.createMessage(message);
 });
 
 client.on('message', async (message) => {
