@@ -149,6 +149,23 @@ client.on('message', async (message) => {
     await createMessage.createMessage(message);
 });
 
+client.on('messageReactionAdd', async (messageReaction, user) => {
+    if(messageReaction.message.id !== '728235085735657474') return;
+
+    if(messageReaction.emoji.name !== '✅') return;
+
+    const member = messageReaction.message.guild.members.cache.get(user.id);
+
+
+    if(member) {
+        const role = messageReaction.message.guild.roles.cache.get('728227400709832746');
+        if(role) {
+            await member.roles.add(role);
+            console.log(`Role added to ${user.username}`);
+        }
+    }
+});
+
 client.on('message', async (message) => {
 
     let prefix;
@@ -191,4 +208,43 @@ if(process.env.ENVIRONMENT === 'dev') {
     });
 } else {
     return console.error('Environment has not been set up correctly');
+}
+
+
+/**
+ * Process message reaction
+ *
+ * @param reaction
+ * @param user
+ * @param type
+ * */
+async function getMessageReaction(reaction, user, type) {
+    try {
+        let emoji;
+
+        if(reaction.emoji.id === null) {
+            emoji = reaction.emoji.name;
+        } else {
+            emoji = reaction.emoji.id;
+        }
+        if (!reaction.message.guild) return;
+
+        const member = reaction.message.guild.members.cache.get(user.id);
+        if (!member) return;
+
+        if (type === 'add' || type === 'remove') {
+
+            if (type === 'add') {
+                const role = reaction.message.guild.roles.cache.get('728227400709832746');
+                if (!role) return;
+
+                await member.roles.add(role);
+            } else if (type === 'remove') {
+                const role = reaction.message.guild.roles.cache.get('728227400709832746');
+                if (!role) return;
+
+                await member.roles.remove(role);
+            }
+        }
+    } catch {}
 }
