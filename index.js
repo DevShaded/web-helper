@@ -149,6 +149,7 @@ client.on('message', async (message) => {
     await createMessage.createMessage(message);
 });
 
+// TOS Agreement: Whenever a client accept the TOS
 client.on('messageReactionAdd', async (messageReaction, user) => {
     if(messageReaction.message.id !== '728235085735657474') return;
 
