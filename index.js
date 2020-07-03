@@ -167,6 +167,79 @@ client.on('messageReactionAdd', async (messageReaction, user) => {
     }
 });
 
+// Guild Member Add - Whenever a user joins a guild
+client.on('guildMemberAdd', async (member) => {
+    let createdDatetime = member.user.createdTimestamp;
+    createdDatetime = moment(createdDatetime).format('YYYY-MM-DD HH-mm-ss');
+
+    pool.execute("INSERT IGNORE INTO users (userID, bot, createdTimestamp, discriminator, username, displayAvatarURL) VALUES (?, ?, ?, ?, ?, ?)", [
+        member.user.id,
+        member.user.bot,
+        createdDatetime,
+        member.user.discriminator,
+        member.user.username,
+        member.user.displayAvatarURL()
+    ]);
+
+    const [newMember] = await pool.execute("SELECT * FROM guilds WHERE guildID = ? AND log_welcome IS NOT NULL", [
+        member.guild.id
+    ]);
+
+    if(newMember.length > 0){
+        try {
+            let iGuild = await client.guilds.cache.get(newMember[0]['guildID']);
+            let iChannel = await iGuild.channels.cache.get(newMember[0]['log_welcome']);
+
+            await iChannel.send({
+                embed: {
+                    color: '#28a745',
+                    author: {
+                        name: `${member.user.tag} (${member.user.id})`,
+                        icon_url: member.user.displayAvatarURL(),
+                    },
+                    timestamp: new Date(),
+                    footer: {
+                        text: `Web Helper`,
+                    }
+                }
+            });
+        } catch {
+
+        }
+    }
+});
+
+// Guild Member Remove - Whenever a user leaves a guild
+client.on('guildMemberRemove', async (member) => {
+
+    const [oldMember] = await pool.execute("SELECT * FROM guilds WHERE guildID = ? AND log_welcome IS NOT NULL", [
+        member.guild.id
+    ]);
+
+    if(oldMember.length > 0){
+        try {
+            let iGuild = await client.guilds.cache.get(oldMember[0]['guildID']);
+            let iChannel = await iGuild.channels.cache.get(oldMember[0]['log_welcome']);
+
+            await iChannel.send({
+                embed: {
+                    color: '#dc3545',
+                    author: {
+                        name: `${member.user.tag} (${member.user.id})`,
+                        icon_url: member.user.displayAvatarURL(),
+                    },
+                    timestamp: new Date(),
+                    footer: {
+                        text: 'Web Helper',
+                    }
+                }
+            });
+        } catch {
+
+        }
+    }
+});
+
 client.on('message', async (message) => {
 
     let prefix;
