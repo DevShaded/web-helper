@@ -8,7 +8,7 @@ module.exports = {
         await message.channel.send({
             embed: {
                 color: '#14b1f5',
-                title: 'HTML a',
+                title: 'HTML <a>',
                 description: `**Definition and Usage**\n` +
                     "\n" +
                     " The `<a>` tag defines a anchor, which is used to link from one page to another.\n" +
