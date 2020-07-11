@@ -41,7 +41,6 @@ Channel.prototype.createChannel = async function (channel){
         channel.topic,
         deleted,
         channel.createdTimestamp,
-
     ]);
 };
 /**
@@ -76,15 +75,6 @@ Channel.prototype.channelUpdate = async function (channel){
     ]);
 };
 
-/**
- * What to do when a new <text/category/etc> channel has been deleted
- * @param channel
- * */
-Channel.prototype.deleteChannel = async function (channel){
-
-    // await pool.execute("DELETE FROM channels WHERE = channels, id");
-
-};
 
 module.exports = {
     Channel

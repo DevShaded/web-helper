@@ -42,7 +42,7 @@ module.exports = {
                         icon_url: `${message.guild.me.user.displayAvatarURL()}`,
                     },
                     color: `#17a2b8`,
-                    description: `This bot is being develop by DevShaded#1435.\n\nThis bot is active in **${(client.guilds.cache.size).toLocaleString()}** Servers and serves **${(client.users.cache.size).toLocaleString()}** Users.\n\n**Process Information**`,
+                    description: `This bot is being developed by DevShaded#1435.\n\nThis bot is active in **${(client.guilds.cache.size).toLocaleString()}** Servers and serves **${(client.users.cache.size).toLocaleString()}** Users.\n\n**Process Information**`,
                     fields: [
                         {
                             name: `Name`,

@@ -243,7 +243,7 @@ client.on('guildMemberRemove', async (member) => {
 client.on('message', async (message) => {
 
     let prefix;
-    const [getPrefix] = await pool.execute("SELECT prefix FROM guild WHERE guildID = ?", [
+    const [getPrefix] = await pool.execute("SELECT prefix FROM guilds WHERE guildID = ?", [
         message.guild.id
     ]);
 
