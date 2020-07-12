@@ -18,6 +18,8 @@ function Channel() {
  * @param channel
  * */
 Channel.prototype.createChannel = async function (channel){
+    let createdDatetime = channel.createdTimestamp;
+    createdDatetime = moment(createdDatetime).format('YYYY-MM-DD HH-mm-ss');
 
     let nsfw;
     let deleted;
@@ -40,7 +42,7 @@ Channel.prototype.createChannel = async function (channel){
         nsfw,
         channel.topic,
         deleted,
-        channel.createdTimestamp,
+        createdTimestamp,
     ]);
 };
 /**
@@ -48,6 +50,8 @@ Channel.prototype.createChannel = async function (channel){
  * @param channel
  * */
 Channel.prototype.channelUpdate = async function (channel){
+    let createdDatetime = channel.createdTimestamp;
+    createdDatetime = moment(createdDatetime).format('YYYY-MM-DD HH-mm-ss');
 
     let nsfw;
     let deleted;
@@ -70,7 +74,7 @@ Channel.prototype.channelUpdate = async function (channel){
         nsfw,
         channel.topic,
         deleted,
-        channel.createdTimestamp,
+        createdTimestamp,
         channel.id
     ]);
 };

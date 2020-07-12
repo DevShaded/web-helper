@@ -71,26 +71,55 @@ client.on('guildCreate', async (guild) => {
     let createdDatetime = guild.createdTimestamp;
     createdDatetime = moment(createdDatetime).format('YYYY-MM-DD HH-mm-ss');
 
+    let deleted;
+    let large;
+    let partnered;
+    let verified;
+
+    if (guild.deleted) {
+        deleted = 1;
+    } else {
+        deleted = 0;
+    }
+
+    if (guild.large) {
+        large = 1;
+    } else {
+        large = 0;
+    }
+
+    if (guild.partnered) {
+        partnered = 1;
+    } else {
+        partnered = 0;
+    }
+
+    if (guild.verified) {
+        verified = 1;
+    } else {
+        verified = 0;
+    }
+
     await pool.execute("INSERT IGNORE INTO guilds (guildName, guildID, banner, deleted, description, explicitContentFilter, iconURL, large, memberCount, mfaLevel, ownerID, partnered, premiumSubscriptionCount, premiumTier, region, splashURL, vanityURLCode, verificationLevel, verified, createdTimestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
         guild.name,
         guild.id,
         guild.banner,
-        guild.deleted,
+        deleted,
         guild.description,
         guild.explicitContentFilter,
         guild.iconURL(),
-        guild.large,
+        large,
         guild.memberCount,
         guild.mfaLevel,
         guild.ownerID,
-        guild.partnered,
+        partnered,
         guild.premiumSubscriptionCount,
         guild.premiumTier,
         guild.region,
         guild.splashURL(),
         guild.vanityURLCode,
         guild.verificationLevel,
-        guild.verified,
+        verified,
         createdDatetime
     ]);
 
@@ -100,7 +129,7 @@ client.on('guildCreate', async (guild) => {
     await mChannel.send({
         embed: {
             color: '#28a745',
-            description: `<:signin:> Bot has joined **${guild.name}**`,
+            description: `<:signin:724245591244275774> Bot has joined **${guild.name}**`,
             timestamp: new Date(),
             footer: {
                 text: 'Web Helper',
@@ -118,7 +147,7 @@ client.on('guildDelete', async (guild) => {
     await mChannel.send({
         embed: {
             color: '#dc3545',
-            description: `:signout: Bot has left **${guild.name}**`,
+            description: `<:signout:724245823482888244> Bot has left **${guild.name}**`,
             timestamp: new Date(),
             footer: {
                 text: 'Web Helper',
@@ -284,7 +313,7 @@ if(process.env.ENVIRONMENT === 'dev') {
     return console.error('Environment has not been set up correctly');
 }
 
-
+// Not in use
 /**
  * Process message reaction
  *
@@ -292,33 +321,33 @@ if(process.env.ENVIRONMENT === 'dev') {
  * @param user
  * @param type
  * */
-async function getMessageReaction(reaction, user, type) {
-    try {
-        let emoji;
-
-        if(reaction.emoji.id === null) {
-            emoji = reaction.emoji.name;
-        } else {
-            emoji = reaction.emoji.id;
-        }
-        if (!reaction.message.guild) return;
-
-        const member = reaction.message.guild.members.cache.get(user.id);
-        if (!member) return;
-
-        if (type === 'add' || type === 'remove') {
-
-            if (type === 'add') {
-                const role = reaction.message.guild.roles.cache.get('728227400709832746');
-                if (!role) return;
-
-                await member.roles.add(role);
-            } else if (type === 'remove') {
-                const role = reaction.message.guild.roles.cache.get('728227400709832746');
-                if (!role) return;
-
-                await member.roles.remove(role);
-            }
-        }
-    } catch {}
-}
+// async function getMessageReaction(reaction, user, type) {
+//     try {
+//         let emoji;
+//
+//         if(reaction.emoji.id === null) {
+//             emoji = reaction.emoji.name;
+//         } else {
+//             emoji = reaction.emoji.id;
+//         }
+//         if (!reaction.message.guild) return;
+//
+//         const member = reaction.message.guild.members.cache.get(user.id);
+//         if (!member) return;
+//
+//         if (type === 'add' || type === 'remove') {
+//
+//             if (type === 'add') {
+//                 const role = reaction.message.guild.roles.cache.get('728227400709832746');
+//                 if (!role) return;
+//
+//                 await member.roles.add(role);
+//             } else if (type === 'remove') {
+//                 const role = reaction.message.guild.roles.cache.get('728227400709832746');
+//                 if (!role) return;
+//
+//                 await member.roles.remove(role);
+//             }
+//         }
+//     } catch {}
+// }
