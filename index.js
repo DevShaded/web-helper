@@ -201,12 +201,29 @@ client.on('guildMemberAdd', async (member) => {
     let createdDatetime = member.user.createdTimestamp;
     createdDatetime = moment(createdDatetime).format('YYYY-MM-DD HH-mm-ss');
 
-    pool.execute("INSERT IGNORE INTO users (userID, bot, createdTimestamp, discriminator, username, displayAvatarURL) VALUES (?, ?, ?, ?, ?, ?)", [
+    let bot;
+
+    if (member.user.bot) {
+        bot = 1;
+    } else {
+        bot = 0;
+    }
+
+    console.log(
+        member.user.username,
         member.user.id,
-        member.user.bot,
+        bot,
         createdDatetime,
         member.user.discriminator,
+        member.user.displayAvatarURL()
+    );
+
+    pool.execute("INSERT IGNORE INTO users (username, userID, bot, createdTimestamp, discriminator, displayAvatarURL) VALUES (?, ?, ?, ?, ?, ?)", [
         member.user.username,
+        member.user.id,
+        bot,
+        createdDatetime,
+        member.user.discriminator,
         member.user.displayAvatarURL()
     ]);
 

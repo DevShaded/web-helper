@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    name: 'paragraphs',
+    name: 'paragraph',
     description: 'How to: HTML paragraph tag',
     execute: async function (client, message, args) {
 
