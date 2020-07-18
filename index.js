@@ -39,6 +39,12 @@ const fs = require('fs');
 try {
     const registerCommandFolders = [
         ["HTML", "Html Commands"],
+        ["html-content-sectioning", "Content sectioning"],
+        ["html-document-metadata", "Document metadata"],
+        ["html-forms", "Forms"],
+        ["html-image-multimedia", "Image and multimedia"],
+        ["html-Inline-text-semantics", "Inline text semantics"],
+        ["html-text-content", "Text content"],
         ["Fun", "Fun Commands"],
         ["Public", "Public Commands"]
     ];
