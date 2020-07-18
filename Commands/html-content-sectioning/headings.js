@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    name: 'heading',
+    name: 'headings',
     description: 'How to: headings in HTML',
     execute: async function (client, message, args) {
 
