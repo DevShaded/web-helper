@@ -18,8 +18,8 @@ function Channel() {
  * @param channel
  * */
 Channel.prototype.createChannel = async function (channel){
-    let createdDatetime = channel.createdTimestamp;
-    createdDatetime = moment(createdDatetime).format('YYYY-MM-DD HH-mm-ss');
+    let createdTimestamp = channel.createdTimestamp;
+    createdTimestamp = moment(createdTimestamp).format('YYYY-MM-DD HH-mm-ss');
 
     let nsfw;
     let deleted;
@@ -36,6 +36,14 @@ Channel.prototype.createChannel = async function (channel){
         nsfw = 0;
     }
 
+    console.log(
+        channel.name,
+        channel.id,
+        nsfw,
+        channel.topic,
+        deleted,
+        createdTimestamp,
+    );
     await pool.execute("INSERT INTO channels (name, id, nsfw, topic, deleted, createdTimestamp) VALUES (?, ?, ?, ?, ?, ?)", [
         channel.name,
         channel.id,
@@ -50,8 +58,8 @@ Channel.prototype.createChannel = async function (channel){
  * @param channel
  * */
 Channel.prototype.channelUpdate = async function (channel){
-    let createdDatetime = channel.createdTimestamp;
-    createdDatetime = moment(createdDatetime).format('YYYY-MM-DD HH-mm-ss');
+    let createdTimestamp = channel.createdTimestamp;
+    createdTimestamp = moment(createdTimestamp).format('YYYY-MM-DD HH-mm-ss');
 
     let nsfw;
     let deleted;
